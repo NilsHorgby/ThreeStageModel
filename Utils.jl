@@ -1,8 +1,15 @@
 module Utils
-
-using .Main.Initialisation
-using PrettyTables
-
+export predicted_allele_frequency
+function predicted_allele_frequency(x::Float64, selection_cofficient::Float64, dispersal_distance::Float64)::Float64
+    if x >= 0
+        return -1/2 + 3/2 * tanh(sqrt(selection_cofficient/(2*dispersal_distance^2))*x+ atanh(sqrt(2/3)))^2
+    else
+        return 3/2 - 3/2 * tanh(-sqrt(selection_cofficient/(2*dispersal_distance^2))*x + atanh(sqrt(2/3)))^2
+    end
+end
+#using .Main.Initialisation
+#using PrettyTables
+#=
 export summary
 
 function Base.summary(patch::Patch)::Nothing
@@ -43,6 +50,5 @@ function Base.summary(population::Population, axis::Int64=1, patch::Union{Int64,
         end
     end
 end
-patch = 2
-summary(population, )
+=#
 end
